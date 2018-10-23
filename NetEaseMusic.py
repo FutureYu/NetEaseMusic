@@ -3,9 +3,9 @@ import re
 import os
 import urllib
 
-print("此方法无法下载已下架和需单独购买歌曲")
-print("所下载歌曲版权归网易所有，请勿用于商业用途，否则后果自负")
-print("软件代码版权所有，严禁侵犯")
+print("此方法无法下载已下架和需单独购买歌曲！")
+print("所下载歌曲版权归网易所有，请勿用于商业用途，且需在24小时内删除，否则后果自负！")
+print("软件代码版权所有，严禁侵犯！")
 print()
 while True:
     oldUrl = input("请复制网易云歌曲地址，如：https://music.163.com/#/song?id=413812473\n地址：") #https://music.163.com/#/song?id=228252
@@ -27,14 +27,13 @@ while True:
     print()
     print(f"已检测到歌曲：{name}-{artist}")
     newUrl = f"http://music.163.com/song/media/outer/url?id={songId}.mp3"  #http://music.163.com/song/media/outer/url?id=228252.mp3
-    print()
     songHtml = requests.get(newUrl)
 
     if songHtml.url == "https://music.163.com/404":
-        print("下载失败，无法下载")
+        print("下载失败，无法下载！")
     else:
         print("正在下载...")
         urllib.request.urlretrieve(newUrl, f"{name}-{artist}.mp3")
-        print("下载完成")
+        print("下载完成！")
     print()
     print()
