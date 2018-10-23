@@ -26,11 +26,15 @@ while True:
 
     print()
     print(f"已检测到歌曲：{name}-{artist}")
-    print("正在下载...")
-    print()
-
     newUrl = f"http://music.163.com/song/media/outer/url?id={songId}.mp3"  #http://music.163.com/song/media/outer/url?id=228252.mp3
-    urllib.request.urlretrieve(newUrl, f"{name}-{artist}.mp3")
-    print("下载完成")
+    print()
+    songHtml = requests.get(newUrl)
+
+    if songHtml.url == "https://music.163.com/404":
+        print("下载失败，无法下载")
+    else:
+        print("正在下载...")
+        urllib.request.urlretrieve(newUrl, f"{name}-{artist}.mp3")
+        print("下载完成")
     print()
     print()
