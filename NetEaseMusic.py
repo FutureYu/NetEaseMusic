@@ -16,8 +16,8 @@ def downLoad(songId):
     html = requests.get(nameUrl,headers = headers).text
 
     names = re.findall('''"name":"(.*?)"''',html)
-    name = names[0]
     artist = names[1]
+    name = names[0].split("\\")[0]
 
     print()
     print(f"已检测到歌曲：{name}-{artist}")
@@ -32,8 +32,11 @@ def downLoad(songId):
         if newNewUrl == "https://music.163.com/404" or newNewUrl == "http://music.163.com/404":
             print("下载失败，无法下载！请检查歌曲是否需付费")
         else:
+            print(f"下载 {name}-{artist}.mp3 中！")
+            with open(f"{name}-{artist}.mp3", "w") as f:
+                f.write("1")
             urllib.request.urlretrieve(newNewUrl, f"{name}-{artist}.mp3")
-            print("下载完成！")
+            print(f"下载 {name}-{artist}.mp3 完成！")
     print()
 
 def getSongs(playList):
